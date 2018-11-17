@@ -97,13 +97,16 @@ public class MyService extends Service {
     builder.setFullScreenIntent(pendingIntent, true);
 
     // Ad launch button intent in notification.
-    builder.addAction(ok(ACTION_LAUNCH_AD_APP, android.R.drawable.ic_media_play, "Launch Ad"));
+    builder.addAction(
+        getNotificationAction(ACTION_LAUNCH_AD_APP, android.R.drawable.ic_media_play, "Launch Ad"));
 
     // Ad close button intent in notification.
-    builder.addAction(ok(ACTION_CLOSE_AD_APP, android.R.drawable.ic_media_pause, "Close Ad"));
+    builder.addAction(
+        getNotificationAction(ACTION_CLOSE_AD_APP, android.R.drawable.ic_media_pause, "Close Ad"));
 
     // stop service intent in notification.
-    builder.addAction(ok(ACTION_STOP_SERVICE, android.R.drawable.ic_delete, "Stop Service"));
+    builder.addAction(
+        getNotificationAction(ACTION_STOP_SERVICE, android.R.drawable.ic_delete, "Stop Service"));
 
     // Build the notification.
     Notification notification = builder.build();
@@ -112,7 +115,8 @@ public class MyService extends Service {
     startForeground(1, notification);
   }
 
-  private NotificationCompat.Action ok(String action, int drawble, String title) {
+  private NotificationCompat.Action getNotificationAction(String action, int drawble,
+      String title) {
     Intent launchIntent = new Intent(this, MyService.class);
     launchIntent.setAction(action);
     PendingIntent pendingLaunchIntent = PendingIntent.getService(this, 0, launchIntent, 0);
